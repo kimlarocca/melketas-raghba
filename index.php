@@ -1,7 +1,7 @@
 <?php require_once('Connections/cms.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
@@ -12,7 +12,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
+      break;
     case "long":
     case "int":
       $theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -32,42 +32,37 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 //content
-mysql_select_db($database_cms, $cms);
+mysqli_select_db($cms, $database_cms);
 $query_bio = "SELECT * FROM cmsPages WHERE pageID = 158";
-$bio = mysql_query($query_bio, $cms) or die(mysql_error());
-$row_bio = mysql_fetch_assoc($bio);
-$totalRows_bio = mysql_num_rows($bio);
+$bio = mysqli_query($query_bio, $cms) or die(mysqli_error($cms));
+$row_bio = mysqli_fetch_assoc($bio);
+$totalRows_bio = mysqli_num_rows($bio);
 
-mysql_select_db($database_cms, $cms);
 $query_reviews = "SELECT * FROM cmsPages WHERE pageID = 156";
-$reviews = mysql_query($query_reviews, $cms) or die(mysql_error());
-$row_reviews = mysql_fetch_assoc($reviews);
-$totalRows_reviews = mysql_num_rows($reviews);
+$reviews = mysqli_query($query_reviews, $cms) or die(mysqli_error($cms));
+$row_reviews = mysqli_fetch_assoc($reviews);
+$totalRows_reviews = mysqli_num_rows($reviews);
 
-mysql_select_db($database_cms, $cms);
 $query_hire = "SELECT * FROM cmsPages WHERE pageID = 159";
-$hire = mysql_query($query_hire, $cms) or die(mysql_error());
-$row_hire = mysql_fetch_assoc($hire);
-$totalRows_hire = mysql_num_rows($hire);
+$hire = mysqli_query($query_hire, $cms) or die(mysqli_error($cms));
+$row_hire = mysqli_fetch_assoc($hire);
+$totalRows_hire = mysqli_num_rows($hire);
 
-mysql_select_db($database_cms, $cms);
 $query_classes = "SELECT * FROM cmsPages WHERE pageID = 155";
-$classes = mysql_query($query_classes, $cms) or die(mysql_error());
-$row_classes = mysql_fetch_assoc($classes);
-$totalRows_classes = mysql_num_rows($classes);
+$classes = mysqli_query($query_classes, $cms) or die(mysqli_error($cms));
+$row_classes = mysqli_fetch_assoc($classes);
+$totalRows_classes = mysqli_num_rows($classes);
 
-mysql_select_db($database_cms, $cms);
 $query_faqs = "SELECT * FROM cmsPages WHERE pageID = 157";
-$faqs = mysql_query($query_faqs, $cms) or die(mysql_error());
-$row_faqs = mysql_fetch_assoc($faqs);
-$totalRows_faqs = mysql_num_rows($faqs);
+$faqs = mysqli_query($query_faqs, $cms) or die(mysqli_error($cms));
+$row_faqs = mysqli_fetch_assoc($faqs);
+$totalRows_faqs = mysqli_num_rows($faqs);
 
 //photos
-mysql_select_db($database_cms, $cms);
 $query_Recordset1 = "SELECT * FROM photos WHERE albumID = 363 ORDER BY photoSequence ASC";
-$Recordset1 = mysql_query($query_Recordset1, $cms) or die(mysql_error());
-$row_Recordset1 = mysql_fetch_assoc($Recordset1);
-$totalRows_Recordset1 = mysql_num_rows($Recordset1);
+$Recordset1 = mysqli_query($query_Recordset1, $cms) or die(mysqli_error($cms));
+$row_Recordset1 = mysqli_fetch_assoc($Recordset1);
+$totalRows_Recordset1 = mysqli_num_rows($Recordset1);
 ?>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -84,12 +79,12 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
 <script src="js/modernizr.custom.js"></script>
 </head>
 <body>
-<div class="container"> 
+<div class="container">
   <!-- menu button -->
   <div id="wn_menu">MENU
     <div id="wn_hamburger"><span></span><span></span><span></span></div>
   </div>
-  
+
   <!-- home -->
   <section id="home">
     <div class="sectionContent">
@@ -142,18 +137,18 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
             <div class="item-title">
               <h2><?php echo $row_Recordset1['photoTitle']; ?></h2>
             </div>
-            <?php 
-		} 
+            <?php
+		}
 		if ($row_Recordset1['photoDescription'] != ''){
 		?>
             <p><?php echo $row_Recordset1['photoDescription']; ?></p>
-            <?php 
-		} 
+            <?php
+		}
 		?>
           </div>
         </div>
         </a>
-        <?php } while ($row_Recordset1 = mysql_fetch_assoc($Recordset1)); ?>
+        <?php } while ($row_Recordset1 = mysqli_fetch_assoc($Recordset1)); ?>
     </div>
   </section>
   <section id="faqs">
@@ -181,10 +176,10 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
     <div class="social"> <a class="icon-mail4" href="mailto:norelein929@gmail.com"></a> <a class="icon-facebook3" href="https://www.facebook.com/melraghba"></a> <a class="icon-youtube3" href="https://www.youtube.com/channel/UCuwWTOUkDYeV0ZlXG7dTeUA"></a> </div>
   </nav>
 </div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/lightbox.js"></script> 
-<script type="text/javascript" src="js/masonry.pkgd.min.js"></script> 
+<script type="text/javascript" src="js/lightbox.js"></script>
+<script type="text/javascript" src="js/masonry.pkgd.min.js"></script>
 <script type="text/javascript" src="js/imagesloaded.pkgd.min.js"></script>
 </body>
 </html>

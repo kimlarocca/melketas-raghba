@@ -7,7 +7,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($theValue) : mysqli_escape_string($theValue);
 
   switch ($theType) {
     case "text":
@@ -34,33 +34,33 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 //content
 mysqli_select_db($cms, $database_cms);
 $query_bio = "SELECT * FROM cmsPages WHERE pageID = 158";
-$bio = mysqli_query($query_bio, $cms) or die(mysqli_error($cms));
+$bio = mysqli_query($cms, $query_bio) or die(mysqli_error($cms));
 $row_bio = mysqli_fetch_assoc($bio);
 $totalRows_bio = mysqli_num_rows($bio);
 
 $query_reviews = "SELECT * FROM cmsPages WHERE pageID = 156";
-$reviews = mysqli_query($query_reviews, $cms) or die(mysqli_error($cms));
+$reviews = mysqli_query($cms, $query_reviews) or die(mysqli_error($cms));
 $row_reviews = mysqli_fetch_assoc($reviews);
 $totalRows_reviews = mysqli_num_rows($reviews);
 
 $query_hire = "SELECT * FROM cmsPages WHERE pageID = 159";
-$hire = mysqli_query($query_hire, $cms) or die(mysqli_error($cms));
+$hire = mysqli_query($cms, $query_hire) or die(mysqli_error($cms));
 $row_hire = mysqli_fetch_assoc($hire);
 $totalRows_hire = mysqli_num_rows($hire);
 
 $query_classes = "SELECT * FROM cmsPages WHERE pageID = 155";
-$classes = mysqli_query($query_classes, $cms) or die(mysqli_error($cms));
+$classes = mysqli_query($cms, $query_classes) or die(mysqli_error($cms));
 $row_classes = mysqli_fetch_assoc($classes);
 $totalRows_classes = mysqli_num_rows($classes);
 
 $query_faqs = "SELECT * FROM cmsPages WHERE pageID = 157";
-$faqs = mysqli_query($query_faqs, $cms) or die(mysqli_error($cms));
+$faqs = mysqli_query($cms, $query_faqs) or die(mysqli_error($cms));
 $row_faqs = mysqli_fetch_assoc($faqs);
 $totalRows_faqs = mysqli_num_rows($faqs);
 
 //photos
 $query_Recordset1 = "SELECT * FROM photos WHERE albumID = 363 ORDER BY photoSequence ASC";
-$Recordset1 = mysqli_query($query_Recordset1, $cms) or die(mysqli_error($cms));
+$Recordset1 = mysqli_query($cms, $query_Recordset1) or die(mysqli_error($cms));
 $row_Recordset1 = mysqli_fetch_assoc($Recordset1);
 $totalRows_Recordset1 = mysqli_num_rows($Recordset1);
 ?>
@@ -184,9 +184,9 @@ $totalRows_Recordset1 = mysqli_num_rows($Recordset1);
 </body>
 </html>
 <?php
-mysql_free_result($reviews);
-mysql_free_result($bio);
-mysql_free_result($hire);
-mysql_free_result($classes);
-mysql_free_result($faqs);
+mysqli_free_result($reviews);
+mysqli_free_result($bio);
+mysqli_free_result($hire);
+mysqli_free_result($classes);
+mysqli_free_result($faqs);
 ?>
